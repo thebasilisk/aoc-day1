@@ -1,10 +1,15 @@
 use std::fs::read_to_string;
 
-
 fn main() {
     let input = read_to_string("input.txt").unwrap();
     
-    let (mut list1, mut list2) : (Vec<u32>, Vec<u32>) = input.lines().map(|line| line.split_once(" ").map(|x| (x.0.parse::<u32>().unwrap(), x.1.trim().parse::<u32>().unwrap())).unwrap()).unzip();
+    let (mut list1, mut list2) : (Vec<u32>, Vec<u32>) = 
+        input.lines()
+            .map(|line| line.split_once("   ")
+            .map(|pair| (pair.0.parse::<u32>().unwrap(), pair.1.parse::<u32>().unwrap()))
+            .unwrap())
+            .unzip();
+
     list1.sort();
     list2.sort();
 
